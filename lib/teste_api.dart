@@ -1,5 +1,8 @@
+import 'package:app_noticias/services/noticias_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:app_noticias/models/noticia.dart';
 
 class TesteApi extends StatefulWidget {
   const TesteApi({super.key});
@@ -10,6 +13,19 @@ class TesteApi extends StatefulWidget {
 
 class _TesteApiState extends State<TesteApi> {
   String mensagem = 'Toque no botão para testar';
+
+  final NoticiasService _noticiasService = NoticiasService();
+
+  late Future<List<Noticia>> _listaNoticias;
+
+  Future<void> carregarNoticias() async {
+    _listaNoticias = _noticiasService.getNoticias();
+
+    List<Noticia> noticias = await _listaNoticias;
+
+    print('---Teste no Console---');
+    print('Quantidade de noticias: ${noticias.length}');
+  }
 
   Future<void> testar() async {
     try {
@@ -37,6 +53,19 @@ class _TesteApiState extends State<TesteApi> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton(onPressed: testar, child: const Text('Testar API')),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(mensagem),
+
+            const SizedBox(
+              height: 50,
+            ),
+
+            ElevatedButton(
+              onPressed: carregarNoticias,
+              child: const Text('Carregar Notícias'),
+            ),
             const SizedBox(
               height: 16,
             ),
