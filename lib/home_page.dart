@@ -148,7 +148,14 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                             height: 120,
                             color: const Color(0xFFE4E9Ef),
-                            child: const Icon(Icons.image_outlined),
+                            child: Image.network(
+                              noticia.imagem!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, erro, stack) =>
+                                  const Icon(
+                                    (Icons.image_outlined),
+                                  ),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsetsGeometry.all(12),
@@ -169,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                       child: Text(
-                                        'Categoria: ${noticia.categoriaId}',
+                                        noticia.categoriaNome,
                                       ),
                                     ),
                                     const SizedBox(
