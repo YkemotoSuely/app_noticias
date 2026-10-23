@@ -14,10 +14,10 @@ class NoticiasService {
         final List dados = jsonDecode(resposta.body);
         return dados.map((item) => Noticia.fromJson(item)).toList();
       } else {
-        throw Exception("Não foi possível carregar as notícias");
+        throw "Não foi possível carregar as notícias";
       }
     } catch (e) {
-      throw Exception("Não conectou erro: $e");
+      throw Exception('$e');
     }
   }
 }
