@@ -31,12 +31,12 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Usuario: $nome está logado!'),
+          content: Text('Usuário: $nome logado com sucesso!'),
           duration: const Duration(seconds: 3),
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     } catch (e) {
       setState(() {
         _mensagemErro = e.toString().replaceFirst('Exception', '');
@@ -85,6 +85,12 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              if (_mensagemErro != null) ...[
+                Text(_mensagemErro!, style: const TextStyle(color: Colors.red)),
+              ],
               const SizedBox(
                 height: 20,
               ),
